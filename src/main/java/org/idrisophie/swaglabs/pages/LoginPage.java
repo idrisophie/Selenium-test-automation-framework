@@ -1,7 +1,9 @@
 package org.idrisophie.swaglabs.pages;
 
 import org.idrisophie.swaglabs.utils.BrowserActions;
+import org.idrisophie.swaglabs.utils.CustomSoftAssertion;
 import org.idrisophie.swaglabs.utils.ElementActions;
+import org.idrisophie.swaglabs.utils.Validations;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -26,25 +28,43 @@ public class LoginPage {
     }
 
     // Actions
-    public void enterUsername(String username){
+    public LoginPage enterUsername(String username){
         ElementActions.sendData(driver, this.username, username);
+        return this;
     }
-    public void enterPassword(String password){
+    public LoginPage enterPassword(String password){
         ElementActions.sendData(driver, this.password, password);
+        return this;
     }
-    public void clickLoginButton(){
+    public LoginPage clickLoginButton(){
         ElementActions.clickElement(driver, loginButton);
+        return this;
     }
     public String getErrorMessage(){
         return ElementActions.getText(driver, errorMessage);
     }
 
     // Validations
-    public void assertSuccessfullLogin() {
-        Assert.assertEquals(BrowserActions.getCurrentURL(driver),"https://www.saucedemo.com/inventory.html");
+    public LoginPage assertionLoginPageURL() {
+        CustomSoftAssertion.softAssertion.assertEquals(BrowserActions.getCurrentURL(driver), "https://www.saucedemo.com/");
+        return this;
+    }
+    public LoginPage assertionLoginPageTitle() {
+        CustomSoftAssertion.softAssertion.assertEquals(BrowserActions.getPageTitle(driver), "Swag Labs","Title is not as expected");
+        return this;
+    }
+    public LoginPage assertSuccessfullLoginSoft() {
+        assertionLoginPageURL().assertionLoginPageTitle();
+        return this;
+    }
+    public LoginPage assertSuccessfullLogin() {
+        Validations.validationPageUrl(driver,"https://www.saucedemo.com/inventory.html");
+        return this;
     }
 
-    public void assertUnsuccessfullLogin() {
-        Assert.assertEquals(getErrorMessage(),"Epic sadface: Usernamae and password do not match any user in this service");
+    public LoginPage assertUnsuccessfullLogin() {
+        Validations.validationEquals(getErrorMessage(),"Epic sadface: Username and password do not match any user in this service","Error message is not as expected");
+        return this;
     }
+    // pattern approach
 }
