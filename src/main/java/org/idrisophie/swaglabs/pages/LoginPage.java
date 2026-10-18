@@ -54,7 +54,7 @@ public class LoginPage {
         return this;
     }
     public LoginPage assertSuccessfullLoginSoft() {
-        assertionLoginPageURL().assertionLoginPageTitle();
+        CustomSoftAssertion.softAssertion.assertEquals(BrowserActions.getCurrentURL(driver), "https://www.saucedemo.com/inventory.html", "Login failed: URL is not the inventory page");
         return this;
     }
     public LoginPage assertSuccessfullLogin() {

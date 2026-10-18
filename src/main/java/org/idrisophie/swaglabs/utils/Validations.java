@@ -12,13 +12,13 @@ public class Validations {
         Assert.assertTrue(condition, message);
     }
     public static void validationFalse(boolean condition, String message){
-        Assert.assertTrue(condition, message);
+        Assert.assertFalse(condition, message);
     }
     public static void validationEquals(String actual, String expected, String message){
         Assert.assertEquals(actual, expected, message);
     }
     public static void validationNotEquals(String actual, String expected, String message){
-        Assert.assertEquals(actual, expected, message);
+        Assert.assertNotEquals(actual, expected, message);
     }
     public static void validationPageUrl(WebDriver driver, String expected){
         Assert.assertEquals(BrowserActions.getCurrentURL(driver), expected);
