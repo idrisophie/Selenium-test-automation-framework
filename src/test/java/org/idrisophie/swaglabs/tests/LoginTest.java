@@ -1,5 +1,6 @@
 package org.idrisophie.swaglabs.tests;
 
+import org.idrisophie.swaglabs.drivers.DriverManager;
 import org.idrisophie.swaglabs.pages.LoginPage;
 import org.idrisophie.swaglabs.utils.CustomSoftAssertion;
 import org.openqa.selenium.PageLoadStrategy;
@@ -27,10 +28,7 @@ public class LoginTest {
     @BeforeMethod
     public void setUp(){
         //code
-        EdgeOptions options = new EdgeOptions();
-        options.addArguments("start-maximazed");
-        options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
-        driver = new EdgeDriver(options);
+        driver = DriverManager.createInstance("chrome");
         new LoginPage(driver).navigateToLoginPage();
     }
 
